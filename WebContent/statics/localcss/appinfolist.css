@@ -1,0 +1,28 @@
+.x_content form ul {
+	list-style: none;
+}
+
+.x_content form ul li {
+	width: 350px;
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+	vertical-align: middle;
+}
+
+.x_content form ul li .form-control {
+	display: inline-block !important;
+	width: auto !important;
+	 width: 196px !important;
+}
+
+.x_content form .form-group * {
+	margin-left: 20px;
+}
+
+.btn-group>.dropdown-menu{
+	min-width: 70px;
+}
+.tooltip {
+	z-index: 9999 !important;
+}

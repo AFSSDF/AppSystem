@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.appsys.dao.appcategory.AppCategoryMapper">
+	<select id="getFirstAppCategory" resultType="AppCategory">
+		select * from
+		app_category where parentId is null
+	</select>
+
+	<select id="getCategoryLevelListByPId" resultType="AppCategory">
+		select * from
+		app_category
+		<where>
+			<if test="pid != null and pid != ''"> and parentId=#{pid}</if>
+			<if test="pid == null and pid == ''"> and parentId is null</if>
+		</where>
+	</select>
+</mapper>
