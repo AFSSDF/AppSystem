@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html lang="en" class=" ">
+<html lang="zh" class=" ">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -48,6 +48,35 @@
 </head>
 
 <body class="nav-md">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form
+					action="${pageContext.request.contextPath }/backend/flatform/app/checkSaveWithNoAdopt" 
+					method="post">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">审核未通过原因：</h4>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" id="id" name="id" value="${appInfo.id}"
+							readonly="readonly"> <input type="hidden" id="status"
+							name="status" value="3">
+						<div class="form-group">
+							<textarea rows="4" name="describeText" style="width: 100%"></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input type="submit" class="btn btn-primary" value="提交">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<div class="container body">
 		<div class="main_container">
 			<jsp:include page="backend/backendheader.jsp" />
@@ -65,6 +94,7 @@
 									查看APP基础信息&nbsp;<span class="glyphicon glyphicon-user"></span><small>${devUserSession.devName}</small>
 								</h2>
 								<div class="clearfix"></div>
+
 							</div>
 						</div>
 					</div>
@@ -83,15 +113,15 @@
 									method="post">
 									<input type="hidden" id="id" name="id" value="${appInfo.id}"
 										readonly="readonly"> <input type="hidden" id="status"
-										name="status" value="3">
+										name="status" value="2">
 									<div class="form-group">
 										<label class="control-label col-md-3 col-sm-3 col-xs-12"
 											for="softwareName">软件名称 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="softwareName" name="softwareName"
-												value="${appInfo.softwareName}" disabled="disabled"
-												class="form-control col-md-7 col-xs-12">
+											<input autocomplete="off" type="text" id="softwareName"
+												name="softwareName" value="${appInfo.softwareName}"
+												disabled="disabled" class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>
 									<div class="form-group">
@@ -99,9 +129,10 @@
 											for="APKName">APK名称 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="APKName" name="APKName"
-												value="${appInfo.APKName}" disabled="disabled"
-												class="form-control col-md-7 col-xs-12" readonly="readonly">
+											<input autocomplete="off" type="text" id="APKName"
+												name="APKName" value="${appInfo.APKName}"
+												disabled="disabled" class="form-control col-md-7 col-xs-12"
+												readonly="readonly">
 										</div>
 									</div>
 									<div class="form-group">
@@ -109,9 +140,9 @@
 											for="supportROM">支持ROM <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="supportROM" name="supportROM"
-												value="${appInfo.supportROM}" disabled="disabled"
-												class="form-control col-md-7 col-xs-12">
+											<input autocomplete="off" type="text" id="supportROM"
+												name="supportROM" value="${appInfo.supportROM}"
+												disabled="disabled" class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>
 									<div class="form-group">
@@ -119,7 +150,7 @@
 											for="interfaceLanguage">界面语言 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="interfaceLanguage"
+											<input autocomplete="off" type="text" id="interfaceLanguage"
 												name="interfaceLanguage" disabled="disabled"
 												value="${appInfo.interfaceLanguage}"
 												class="form-control col-md-7 col-xs-12">
@@ -130,9 +161,9 @@
 											for="softwareSize">软件大小 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="softwareSize" name="softwareSize"
-												value="${appInfo.softwareSize}" disabled="disabled"
-												class="form-control col-md-7 col-xs-12">
+											<input autocomplete="off" type="text" id="softwareSize"
+												name="softwareSize" value="${appInfo.softwareSize}"
+												disabled="disabled" class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>
 									<div class="form-group">
@@ -140,8 +171,9 @@
 											for="downloads">下载次数 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="downloads" name="downloads"
-												disabled="disabled" value="${appInfo.downloads}"
+											<input autocomplete="off" type="text" id="downloads"
+												name="downloads" disabled="disabled"
+												value="${appInfo.downloads}"
 												class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>
@@ -151,9 +183,9 @@
 										</label>
 
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" name="flatformName" id="flatformName"
-												value="${appInfo.flatformName}" disabled="disabled"
-												class="form-control col-md-7 col-xs-12">
+											<input autocomplete="off" type="text" name="flatformName"
+												id="flatformName" value="${appInfo.flatformName}"
+												disabled="disabled" class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>
 									<div class="form-group">
@@ -161,7 +193,8 @@
 											for="categoryLevel1">所属分类 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="categoryName" name="categoryName"
+											<input autocomplete="off" type="text" id="categoryName"
+												name="categoryName"
 												value="${appInfo.categoryName1}-->${appInfo.categoryName2}-->${appInfo.categoryName3}"
 												disabled="disabled" class="form-control col-md-7 col-xs-12">
 										</div>
@@ -171,9 +204,9 @@
 											for="statusName">APK状态 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="statusName" name="statusName"
-												value="${appInfo.statusName}" disabled="disabled"
-												class="form-control col-md-7 col-xs-12">
+											<input autocomplete="off" type="text" id="statusName"
+												name="statusName" value="${appInfo.statusName}"
+												disabled="disabled" class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>
 									<div class="form-group">
@@ -201,9 +234,12 @@
 									</div>
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-											<input type="button" class="btn btn-primary" id="adopt"
-												value="审核通过" /> <input type="submit" class="btn btn-info"
-												value="审核不通过" /> <input type="button"
+											<input type="submit" class="btn btn-primary"
+												value="审核通过" /> <button type="button" class="btn btn-info"
+												 data-toggle="modal" data-target="#myModal"
+												 >审核不通过</button>
+												 <input
+												autocomplete="off" type="button"
 												onclick="javascript:history.back(-1);"
 												class="btn btn-primary" value="返回" />
 										</div>
@@ -224,16 +260,17 @@
 								<br>
 								<form class="form-horizontal form-label-left" method="post">
 									<input type="hidden" name="APKName" value="${appInfo.APKName}">
-									<input type="hidden" name="appId" value="${appInfo.id}">
-									<input type="hidden" name="id" id="id"
-										value="${newAppVersion.id}">
+									<input autocomplete="off" type="hidden" name="appId"
+										value="${appInfo.id}"> <input type="hidden" name="id"
+										id="id" value="${newAppVersion.id}">
 									<div class="form-group">
 										<label class="control-label col-md-3 col-sm-3 col-xs-12"
 											for="versionNo">版本号 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="versionNo" name="versionNo"
-												disabled="disabled" value="${newAppVersion.versionNo}"
+											<input autocomplete="off" type="text" id="versionNo"
+												name="versionNo" disabled="disabled"
+												value="${newAppVersion.versionNo}"
 												class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>
@@ -242,8 +279,9 @@
 											for="versionSize">版本大小 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="versionSize" name="versionSize"
-												disabled="disabled" value="${newAppVersion.versionSize}"
+											<input autocomplete="off" type="text" id="versionSize"
+												name="versionSize" disabled="disabled"
+												value="${newAppVersion.versionSize}"
 												class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>
@@ -311,11 +349,5 @@
 		src="${pageContext.request.contextPath }/statics/js/custom.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath }/statics/js/bootstrapValidator.min.js"></script>
-	<script type="text/javascript">
-		$('#adopt').on('click', function() {
-			$('#status').val('2')
-			$(this).next().trigger('click');
-		})
-	</script>
 </body>
 </html>

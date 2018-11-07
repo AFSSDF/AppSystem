@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html lang="en" class=" ">
+<html lang="zh" class=" ">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -70,10 +70,10 @@
 									method="get">
 									<ul>
 										<li style="display: none;"><label for="querySoftwareName">软件名称&nbsp;&nbsp;&nbsp;</label>
-											<input type="text" name="pageIndex" id="pageIndex"
+											<input autocomplete="off" type="text" name="pageIndex" id="pageIndex"
 											class="form-control" value="${pageBean.pageCur}"></li>
 										<li><label for="querySoftwareName">软件名称&nbsp;&nbsp;&nbsp;</label>
-											<input type="text" name="querySoftwareName"
+											<input autocomplete="off" type="text" name="querySoftwareName"
 											id="querySoftwareName" class="form-control"
 											value="${querySoftwareName}"></li>
 										<li><label for="queryFlatformId">所属平台&nbsp;&nbsp;&nbsp;</label>

@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		app_category
 		<where>
 			<if test="pid != null and pid != ''"> and parentId=#{pid}</if>
-			<if test="pid == null and pid == ''"> and parentId is null</if>
+			<if test="pid == null or pid == ''"> and parentId is null</if>
 		</where>
 	</select>
 </mapper>

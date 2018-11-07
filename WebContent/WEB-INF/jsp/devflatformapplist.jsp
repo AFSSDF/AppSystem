@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html lang="en" class=" ">
+<html lang="zh" class=" ">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -45,6 +45,29 @@
 </head>
 
 <body class="nav-md">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">审核未通过原因：</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<textarea rows="4" id="reason" readonly="readonly"
+							name="describeText" style="width: 100%; resize: none;"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="container body">
 		<div class="main_container">
 			<jsp:include page="developer/devheader.jsp" />
@@ -70,12 +93,13 @@
 									method="get">
 									<ul>
 										<li style="display: none;"><label for="querySoftwareName">软件名称&nbsp;&nbsp;&nbsp;</label>
-											<input type="text" name="pageIndex" id="pageIndex"
-											class="form-control" value="${pageBean.pageCur}"></li>
+											<input autocomplete="off" type="text" name="pageIndex"
+											id="pageIndex" class="form-control"
+											value="${pageBean.pageCur}"></li>
 										<li><label for="querySoftwareName">软件名称&nbsp;&nbsp;&nbsp;</label>
-											<input type="text" name="querySoftwareName"
-											id="querySoftwareName" class="form-control"
-											value="${querySoftwareName}"></li>
+											<input autocomplete="off" type="text"
+											name="querySoftwareName" id="querySoftwareName"
+											class="form-control" value="${querySoftwareName}"></li>
 										<li><label for="queryStatus">APP状态&nbsp;&nbsp;&nbsp;</label>
 											<select name="queryStatus" id="queryStatus"
 											class="form-control">
@@ -121,7 +145,7 @@
 														<c:if test="${queryCategoryLevel3 == appCategory.id}">selected </c:if>>${appCategory.categoryName}</option>
 												</c:forEach>
 										</select></li>
-										<li><input type="submit" value="查询"
+										<li><input autocomplete="off" type="submit" value="查询"
 											class="btn btn-primary"></li>
 									</ul>
 								</form>
@@ -161,7 +185,13 @@
 													<th>${appInfo.softwareSize}</th>
 													<th>${appInfo.flatformName}</th>
 													<th>${appInfo.categoryName1}->${appInfo.categoryName2}->${appInfo.categoryName3 }</th>
-													<th>${appInfo.statusName}</th>
+													<th><c:choose>
+															<c:when test="${appInfo.statusName!='审核未通过'}">${appInfo.statusName}</c:when>
+															<c:otherwise>
+																<a href="javascript:void(0);" style="text-decoration: underline;"
+																	onclick="showModal(${appInfo.id})">${appInfo.statusName}</a>
+															</c:otherwise>
+														</c:choose></th>
 													<th>${appInfo.downloads}</th>
 													<th>${appInfo.versionNo}</th>
 													<th class="btn-group"><button type="button"
@@ -180,8 +210,7 @@
 															<li><a href="javascript:void(0);"
 																onclick="modify(this)" data-toggle="tooltip"
 																data-placement="top" title="修改APP基础信息">修改</a></li>
-															<li><a href="javascript:void(0)"
-																onclick="del(this)">删除</a></li>
+															<li><a href="javascript:void(0)" onclick="del(this)">删除</a></li>
 															<li><a href="javascript:void(0)"
 																onclick="view(this)">查看</a></li>
 															<c:choose>

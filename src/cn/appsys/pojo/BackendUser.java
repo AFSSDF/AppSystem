@@ -2,6 +2,8 @@ package cn.appsys.pojo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * 
  * @author Li
@@ -13,8 +15,10 @@ public class BackendUser {
 	private String userName;
 	private Integer userType;
 	private Integer createdBy;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date creationDate;
 	private Integer modifyBy;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date modifyDate;
 	private String userPassword;
 

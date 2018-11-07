@@ -1,5 +1,6 @@
 package cn.appsys.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -16,11 +17,13 @@ import com.mysql.jdbc.StringUtils;
 
 import cn.appsys.pojo.AppCategory;
 import cn.appsys.pojo.AppInfo;
+import cn.appsys.pojo.AppValidate;
 import cn.appsys.pojo.AppVersion;
 import cn.appsys.pojo.BackendUser;
 import cn.appsys.pojo.DataDictionary;
 import cn.appsys.service.appcategory.AppCategoryService;
 import cn.appsys.service.appinfo.AppInfoService;
+import cn.appsys.service.appvalidate.AppValidateService;
 import cn.appsys.service.appversion.AppVersionService;
 import cn.appsys.service.backenduser.BackendUserService;
 import cn.appsys.service.datadictionary.DataDictionaryService;
@@ -44,6 +47,9 @@ public class BackendUserController {
 
 	@Resource
 	private AppVersionService appVersionService;
+
+	@Resource
+	private AppValidateService appValidateService;
 
 	// 登陆页面
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -101,6 +107,20 @@ public class BackendUserController {
 		return "redirect:/backend/flatform/app/list";
 	}
 
+	@RequestMapping(value = "/flatform/app/checkSaveWithNoAdopt", method = RequestMethod.POST)
+	public String checkSaveWithNoAdopt(@RequestParam String id, @RequestParam String status,
+			@RequestParam String describeText) throws Exception {
+		int _status = Integer.parseInt(status);
+		appInfoService.op(id, _status);
+		AppValidate appValidate = new AppValidate();
+		Integer appId = Integer.parseInt(id);
+		appValidate.setAppId(appId);
+		appValidate.setCreateDate(new Date());
+		appValidate.setDescribeText(describeText);
+		appValidateService.addAppValidate(appValidate);
+		return "redirect:/backend/flatform/app/list";
+	}
+
 	// 列表
 	@RequestMapping(value = "/flatform/app/list", method = RequestMethod.GET)
 	public String list(@RequestParam(value = "querySoftwareName", required = false) String querySoftwareName,
@@ -143,8 +163,14 @@ public class BackendUserController {
 		List<DataDictionary> flatformList = dataDictionaryService.getDataDictionaryList("APP_FLATFORM");
 		List<DataDictionary> statusList = dataDictionaryService.getDataDictionaryList("APP_STATUS");
 		List<AppCategory> appCategories1 = appCategoryService.getFirstAppCategory();
-		List<AppCategory> appCategories2 = appCategoryService.getCategoryLevelListByPId(queryCategoryLevel2);
-		List<AppCategory> appCategories3 = appCategoryService.getCategoryLevelListByPId(queryCategoryLevel3);
+		List<AppCategory> appCategories2 = null;
+		if (queryCategoryLevel2 != null) {
+			appCategories2 = appCategoryService.getCategoryLevelListByPId(queryCategoryLevel1);
+		}
+		List<AppCategory> appCategories3 = null;
+		if (queryCategoryLevel3 != null) {
+			appCategories3 = appCategoryService.getCategoryLevelListByPId(queryCategoryLevel2);
+		}
 		model.addAttribute("flatformList", flatformList);
 		model.addAttribute("statusList", statusList);
 		model.addAttribute("appCategories1", appCategories1);

@@ -2,6 +2,8 @@ package cn.appsys.pojo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * 
  * @author Li
@@ -13,8 +15,10 @@ public class AppCategory {
 	private String categoryName;
 	private Integer parentId;
 	private Integer createdBy;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date creationTime;
 	private Integer modifyBy;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date modifyDate;
 	public Integer getId() {
 		return id;

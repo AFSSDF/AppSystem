@@ -61,7 +61,7 @@ public class AppVersionController {
 			@RequestParam(value = "attach", required = false) MultipartFile attach, HttpSession session,
 			HttpServletRequest request) throws Exception {
 		boolean result = true;
-		if(!attach.isEmpty()) {
+		if (!attach.isEmpty()) {
 			int fileSize = 500 * 1024 * 1024;
 			String downloadLink = null;
 			String apkLocPath = null;
@@ -70,7 +70,8 @@ public class AppVersionController {
 				request.setAttribute("message", "文件不能超过500MB！");
 				result = false;
 			} else {
-				String path = request.getSession().getServletContext().getRealPath(File.separator + "statics/uploadfiles");
+//				String path = request.getSession().getServletContext().getRealPath(File.separator + "statics/uploadfiles");
+				String path = Constants.UPLOAD_PATH;
 				// 完整文件名
 				String originalFilename = attach.getOriginalFilename();
 				// 文件名
@@ -124,7 +125,8 @@ public class AppVersionController {
 			request.setAttribute("message", "文件不能超过500MB！");
 			result = false;
 		} else {
-			String path = request.getSession().getServletContext().getRealPath(File.separator + "statics/uploadfiles");
+//			String path = request.getSession().getServletContext().getRealPath(File.separator + "statics/uploadfiles");
+			String path = Constants.UPLOAD_PATH;
 			// 完整文件名
 			String originalFilename = attach.getOriginalFilename();
 			// 文件名

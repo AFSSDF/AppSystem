@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html lang="en" class=" ">
+<html lang="zh" class=" ">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -72,14 +72,14 @@
 									enctype="multipart/form-data"
 									action="${pageContext.request.contextPath }/dev/flatform/app/modifysave"
 									method="post">
-									<input type="hidden" id="id" name="id" value="${appInfo.id}"
+									<input autocomplete="off" type="hidden" id="id" name="id" value="${appInfo.id}"
 										readonly="readonly">
 									<div class="form-group">
 										<label class="control-label col-md-3 col-sm-3 col-xs-12"
 											for="softwareName">软件名称 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="softwareName" name="softwareName"
+											<input autocomplete="off" type="text" id="softwareName" name="softwareName"
 												required="required" value="${appInfo.softwareName}"
 												class="form-control col-md-7 col-xs-12">
 										</div>
@@ -89,7 +89,7 @@
 											for="APKName">APK名称 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="APKName" name="APKName"
+											<input autocomplete="off" type="text" id="APKName" name="APKName"
 												required="required" value="${appInfo.APKName}"
 												class="form-control col-md-7 col-xs-12" readonly="readonly">
 										</div>
@@ -99,7 +99,7 @@
 											for="supportROM">支持ROM <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="supportROM" name="supportROM"
+											<input autocomplete="off" type="text" id="supportROM" name="supportROM"
 												required="required" value="${appInfo.supportROM}"
 												class="form-control col-md-7 col-xs-12">
 										</div>
@@ -109,7 +109,7 @@
 											for="interfaceLanguage">界面语言 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="interfaceLanguage"
+											<input autocomplete="off" type="text" id="interfaceLanguage"
 												name="interfaceLanguage" required="required"
 												value="${appInfo.interfaceLanguage}"
 												class="form-control col-md-7 col-xs-12">
@@ -120,7 +120,7 @@
 											for="softwareSize">软件大小 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="softwareSize" name="softwareSize"
+											<input autocomplete="off" type="text" id="softwareSize" name="softwareSize"
 												value="${appInfo.softwareSize}" required="required"
 												class="form-control col-md-7 col-xs-12">
 										</div>
@@ -130,7 +130,7 @@
 											for="downloads">下载次数 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="downloads" name="downloads"
+											<input autocomplete="off" type="text" id="downloads" name="downloads"
 												required="required" value="${appInfo.downloads}"
 												class="form-control col-md-7 col-xs-12">
 										</div>
@@ -141,7 +141,7 @@
 										</label>
 
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="hidden" disabled="disabled" id="fid"
+											<input autocomplete="off" type="hidden" disabled="disabled" id="fid"
 												value="${appInfo.flatformId}" /> <select name="flatformId"
 												id="flatformId" class="form-control col-md-7 col-xs-12">
 											</select>
@@ -152,7 +152,7 @@
 											for="categoryLevel1">一级分类 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="hidden" disabled="disabled" id="cl1"
+											<input autocomplete="off" type="hidden" disabled="disabled" id="cl1"
 												value="${appInfo.categoryLevel1 }" /> <select
 												name="categoryLevel1" id="categoryLevel1"
 												class="form-control col-md-7 col-xs-12">
@@ -164,7 +164,7 @@
 											for="categoryLevel2">二级分类 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="hidden" disabled="disabled" id="cl2"
+											<input autocomplete="off" type="hidden" disabled="disabled" id="cl2"
 												value="${appInfo.categoryLevel2 }" /> <select
 												name="categoryLevel2" id="categoryLevel2"
 												class="form-control col-md-7 col-xs-12">
@@ -176,7 +176,7 @@
 											for="categoryLevel3">三级分类 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="hidden" disabled="disabled" id="cl3"
+											<input autocomplete="off" type="hidden" disabled="disabled" id="cl3"
 												value="${appInfo.categoryLevel3 }" /> <select
 												name="categoryLevel3" id="categoryLevel3"
 												class="form-control col-md-7 col-xs-12">
@@ -186,17 +186,17 @@
 									<div class="form-group">
 										<label class="control-label col-md-3 col-sm-3 col-xs-12"
 											for="status">APK状态 <span class="required">*</span>
-										</label> <input type="hidden" id="status" name="status"
+										</label> <input autocomplete="off" type="hidden" id="status" name="status"
 											value="${appInfo.status}" required="required"
 											readonly="readonly" class="form-control col-md-7 col-xs-12">
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="statusName" name="statusName"
+											<input autocomplete="off" type="text" id="statusName" name="statusName"
 												value="${appInfo.statusName}" required="required"
 												disabled="disabled" class="form-control col-md-7 col-xs-12">
 										</div>
 										<div class="col-md-6 col-sm-6 col-xs-12"
 											style="display: none;">
-											<input type="text" id="status" name="status" value="1"
+											<input autocomplete="off" type="text" id="status" name="status" value="1"
 												required="required" class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>
@@ -214,11 +214,11 @@
 											for="attach">LOGO图片 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input id="logoPath"
+											<input autocomplete="off" id="logoPath"
 												value="${pageContext.request.contextPath }${appInfo.logoPicPath}"
 												style="display: none" />
 											<div id="logoFile"></div>
-											<input type="file" name="attach" required="required"
+											<input autocomplete="off" type="file" name="attach" required="required"
 												style="display: none;" id="uploadfile"
 												class="form-control col-md-7 col-xs-12">
 										</div>

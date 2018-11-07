@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html lang="en" class=" ">
+<html lang="zh" class=" ">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -94,7 +94,7 @@
 													<td>${appVersion.publishStatusName}</td>
 													<td><a
 														href="${pageContext.request.contextPath}${appVersion.downloadLink}">${appVersion.apkFileName}</a></td>
-													<td>${appVersion.modifyDate}</td>
+													<td>${appVersion.formateDate(appVersion.modifyDate)}</td>
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -117,16 +117,16 @@
 									enctype="multipart/form-data"
 									action="${pageContext.request.contextPath }/dev/flatform/app/version/modifysave"
 									method="post">
-									<input type="hidden" name="APKName" value="${appInfo.APKName}">
-									<input type="hidden" name="appId" value="${appInfo.id}">
-									<input type="hidden" name="id" id="id"
+									<input autocomplete="off" type="hidden" name="APKName" value="${appInfo.APKName}">
+									<input autocomplete="off" type="hidden" name="appId" value="${appInfo.id}">
+									<input autocomplete="off" type="hidden" name="id" id="id"
 										value="${newAppVersion.id}">
 									<div class="form-group">
 										<label class="control-label col-md-3 col-sm-3 col-xs-12"
 											for="versionNo">版本号 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="versionNo" name="versionNo"
+											<input autocomplete="off" type="text" id="versionNo" name="versionNo"
 												readonly="readonly" value="${newAppVersion.versionNo}"
 												class="form-control col-md-7 col-xs-12">
 										</div>
@@ -136,7 +136,7 @@
 											for="versionSize">版本大小 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="versionSize" name="versionSize"
+											<input autocomplete="off" type="text" id="versionSize" name="versionSize"
 												required="required" value="${newAppVersion.versionSize}"
 												class="form-control col-md-7 col-xs-12">
 										</div>
@@ -163,14 +163,14 @@
 										<div id="apkFile"></div>
 										<div id="uploadfile" style="display: none;"
 											class="col-md-6 col-sm-6 col-xs-12">
-											<input type="file" id="attach" name="attach"
+											<input autocomplete="off" type="file" id="attach" name="attach"
 												required="required" class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>
 									<h2 class="red text-center">${message}</h2>
 									<div class="ln_solid"></div>
-									<input type="hidden" value="${pageContext.request.contextPath}${newAppVersion.downloadLink}"
-										id="downloadLink" disabled="disabled"> <input
+									<input autocomplete="off" type="hidden" value="${pageContext.request.contextPath}${newAppVersion.downloadLink}"
+										id="downloadLink" disabled="disabled"> <input autocomplete="off"
 										type="hidden" value="${newAppVersion.apkFileName}"
 										id="apkFileName" disabled="disabled">
 									<div class="form-group">

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<html lang="en" class=" ">
+<html lang="zh" class=" ">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -74,7 +74,7 @@
 											for="softwareName">软件名称 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="softwareName" name="softwareName"
+											<input autocomplete="off" type="text" id="softwareName" name="softwareName"
 												required="required" class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>
@@ -83,7 +83,7 @@
 											for="APKName">APK名称 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="APKName" name="APKName"
+											<input autocomplete="off" type="text" id="APKName" name="APKName"
 												required="required" class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>
@@ -92,7 +92,7 @@
 											for="supportROM">支持ROM <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="supportROM" name="supportROM"
+											<input autocomplete="off" type="text" id="supportROM" name="supportROM"
 												required="required" class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>
@@ -101,7 +101,7 @@
 											for="interfaceLanguage">界面语言 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="interfaceLanguage"
+											<input autocomplete="off" type="text" id="interfaceLanguage"
 												name="interfaceLanguage" required="required"
 												class="form-control col-md-7 col-xs-12">
 										</div>
@@ -111,7 +111,7 @@
 											for="softwareSize">软件大小 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="softwareSize" name="softwareSize"
+											<input autocomplete="off" type="text" id="softwareSize" name="softwareSize"
 												required="required" class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>
@@ -120,7 +120,7 @@
 											for="downloads">下载次数 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="downloads" name="downloads"
+											<input autocomplete="off" type="text" id="downloads" name="downloads"
 												required="required" class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>
@@ -171,7 +171,7 @@
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">待审核</div>
 										<div class="col-md-6 col-sm-6 col-xs-12" style="display: none">
-											<input type="text" id="status" name="status" value="1"
+											<input autocomplete="off" type="text" id="status" name="status" value="1"
 												required="required" class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>
@@ -190,7 +190,7 @@
 											for="attach">LOGO图片 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="file" id="attach" name="attach"
+											<input autocomplete="off" type="file" id="attach" name="attach"
 												required="required" class="form-control col-md-7 col-xs-12">
 										</div>
 									</div>

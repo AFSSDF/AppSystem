@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +32,7 @@ import cn.appsys.pojo.DataDictionary;
 import cn.appsys.pojo.DevUser;
 import cn.appsys.service.appcategory.AppCategoryService;
 import cn.appsys.service.appinfo.AppInfoService;
+import cn.appsys.service.appvalidate.AppValidateService;
 import cn.appsys.service.appversion.AppVersionService;
 import cn.appsys.service.datadictionary.DataDictionaryService;
 import cn.appsys.tools.Constants;
@@ -57,76 +59,90 @@ public class AppInfoController {
 	@Resource
 	private AppCategoryService appCategoryService;
 
+	@Resource
+	private AppValidateService appValidateService;
+
 	// 列表
-		@RequestMapping(value = "/list", method = RequestMethod.GET)
-		public String list(@RequestParam(value = "querySoftwareName", required = false) String querySoftwareName,
-				@RequestParam(value = "queryStatus", required = false) String queryStatus,
-				@RequestParam(value = "queryFlatformId", required = false) String queryFlatformId,
-				@RequestParam(value = "queryCategoryLevel1", required = false) String queryCategoryLevel1,
-				@RequestParam(value = "queryCategoryLevel2", required = false) String queryCategoryLevel2,
-				@RequestParam(value = "queryCategoryLevel3", required = false) String queryCategoryLevel3,
-				@RequestParam(value = "pageIndex", required = false) String pageIndex, Model model) throws Exception {
-			int pageCur = 0;
-			if (!StringUtils.isNullOrEmpty(pageIndex)) {
-				pageCur = Integer.parseInt(pageIndex);
-			}
-			AppInfo appInfo = new AppInfo();
-			appInfo.setSoftwareName(querySoftwareName);
-			Integer status = null;
-			Integer flatformId = null;
-			Integer categoryLevel1 = null;
-			Integer categoryLevel2 = null;
-			Integer categoryLevel3 = null;
-			if (!StringUtils.isNullOrEmpty(queryStatus)) {
-				status = Integer.parseInt(queryStatus);
-			}
-			if (!StringUtils.isNullOrEmpty(queryFlatformId)) {
-				flatformId = Integer.parseInt(queryFlatformId);
-			}
-			if (!StringUtils.isNullOrEmpty(queryCategoryLevel1)) {
-				categoryLevel1 = Integer.parseInt(queryCategoryLevel1);
-			}
-			if (!StringUtils.isNullOrEmpty(queryCategoryLevel2)) {
-				categoryLevel2 = Integer.parseInt(queryCategoryLevel2);
-			}
-			if (!StringUtils.isNullOrEmpty(queryCategoryLevel3)) {
-				categoryLevel3 = Integer.parseInt(queryCategoryLevel3);
-			}
-			appInfo.setStatus(status);
-			appInfo.setFlatformId(flatformId);
-			appInfo.setCategoryLevel1(categoryLevel1);
-			appInfo.setCategoryLevel2(categoryLevel2);
-			appInfo.setCategoryLevel3(categoryLevel3);
-			int dataTotal = appInfoService.getAppInfoCountByThis(appInfo);
-			PageBean pageBean = new PageBean(dataTotal, pageCur, Constants.pageSize);
-			List<AppInfo> appInfos = appInfoService.getAppInfosByThis(appInfo, pageBean);
-			List<DataDictionary> flatformList = dataDictionaryService.getDataDictionaryList("APP_FLATFORM");
-			List<DataDictionary> statusList = dataDictionaryService.getDataDictionaryList("APP_STATUS");
-			List<AppCategory> appCategories1 = appCategoryService.getFirstAppCategory();
-			List<AppCategory> appCategories2 = appCategoryService.getCategoryLevelListByPId(queryCategoryLevel2);
-			List<AppCategory> appCategories3 = appCategoryService.getCategoryLevelListByPId(queryCategoryLevel3);
-			model.addAttribute("flatformList", flatformList);
-			model.addAttribute("statusList", statusList);
-			model.addAttribute("appCategories1", appCategories1);
-			model.addAttribute("appCategories2", appCategories2);
-			model.addAttribute("appCategories3", appCategories3);
-			model.addAttribute("appInfos", appInfos);
-			model.addAttribute("querySoftwareName", querySoftwareName);
-			model.addAttribute("queryStatus", queryStatus);
-			model.addAttribute("queryFlatformId", queryFlatformId);
-			model.addAttribute("queryCategoryLevel1", queryCategoryLevel1);
-			model.addAttribute("queryCategoryLevel2", queryCategoryLevel2);
-			model.addAttribute("queryCategoryLevel3", queryCategoryLevel3);
-			model.addAttribute("pageBean", pageBean);
-			return "devflatformapplist";
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list(@RequestParam(value = "querySoftwareName", required = false) String querySoftwareName,
+			@RequestParam(value = "queryStatus", required = false) String queryStatus,
+			@RequestParam(value = "queryFlatformId", required = false) String queryFlatformId,
+			@RequestParam(value = "queryCategoryLevel1", required = false) String queryCategoryLevel1,
+			@RequestParam(value = "queryCategoryLevel2", required = false) String queryCategoryLevel2,
+			@RequestParam(value = "queryCategoryLevel3", required = false) String queryCategoryLevel3,
+			@RequestParam(value = "pageIndex", required = false) String pageIndex, Model model) throws Exception {
+		int pageCur = 0;
+		if (!StringUtils.isNullOrEmpty(pageIndex)) {
+			pageCur = Integer.parseInt(pageIndex);
 		}
-		
-	
+		AppInfo appInfo = new AppInfo();
+		appInfo.setSoftwareName(querySoftwareName);
+		Integer status = null;
+		Integer flatformId = null;
+		Integer categoryLevel1 = null;
+		Integer categoryLevel2 = null;
+		Integer categoryLevel3 = null;
+		if (!StringUtils.isNullOrEmpty(queryStatus)) {
+			status = Integer.parseInt(queryStatus);
+		}
+		if (!StringUtils.isNullOrEmpty(queryFlatformId)) {
+			flatformId = Integer.parseInt(queryFlatformId);
+		}
+		if (!StringUtils.isNullOrEmpty(queryCategoryLevel1)) {
+			categoryLevel1 = Integer.parseInt(queryCategoryLevel1);
+		}
+		if (!StringUtils.isNullOrEmpty(queryCategoryLevel2)) {
+			categoryLevel2 = Integer.parseInt(queryCategoryLevel2);
+		}
+		if (!StringUtils.isNullOrEmpty(queryCategoryLevel3)) {
+			categoryLevel3 = Integer.parseInt(queryCategoryLevel3);
+		}
+		appInfo.setStatus(status);
+		appInfo.setFlatformId(flatformId);
+		appInfo.setCategoryLevel1(categoryLevel1);
+		appInfo.setCategoryLevel2(categoryLevel2);
+		appInfo.setCategoryLevel3(categoryLevel3);
+		int dataTotal = appInfoService.getAppInfoCountByThis(appInfo);
+		PageBean pageBean = new PageBean(dataTotal, pageCur, Constants.pageSize);
+		List<AppInfo> appInfos = appInfoService.getAppInfosByThis(appInfo, pageBean);
+		List<DataDictionary> flatformList = dataDictionaryService.getDataDictionaryList("APP_FLATFORM");
+		List<DataDictionary> statusList = dataDictionaryService.getDataDictionaryList("APP_STATUS");
+		List<AppCategory> appCategories1 = appCategoryService.getFirstAppCategory();
+		List<AppCategory> appCategories2 = null;
+		if (queryCategoryLevel2 != null) {
+			appCategories2 = appCategoryService.getCategoryLevelListByPId(queryCategoryLevel1);
+		}
+		List<AppCategory> appCategories3 = null;
+		if (queryCategoryLevel3 != null) {
+			appCategories3 = appCategoryService.getCategoryLevelListByPId(queryCategoryLevel2);
+		}
+		model.addAttribute("flatformList", flatformList);
+		model.addAttribute("statusList", statusList);
+		model.addAttribute("appCategories1", appCategories1);
+		model.addAttribute("appCategories2", appCategories2);
+		model.addAttribute("appCategories3", appCategories3);
+		model.addAttribute("appInfos", appInfos);
+		model.addAttribute("querySoftwareName", querySoftwareName);
+		model.addAttribute("queryStatus", queryStatus);
+		model.addAttribute("queryFlatformId", queryFlatformId);
+		model.addAttribute("queryCategoryLevel1", queryCategoryLevel1);
+		model.addAttribute("queryCategoryLevel2", queryCategoryLevel2);
+		model.addAttribute("queryCategoryLevel3", queryCategoryLevel3);
+		model.addAttribute("pageBean", pageBean);
+		return "devflatformapplist";
+	}
 
 	// 添加
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add(@ModelAttribute AppInfo appInfo) {
 		return "devflatformappadd";
+	}
+
+	// 未通过原因
+	@RequestMapping(value = "/reason", method = RequestMethod.GET)
+	@ResponseBody
+	public String reason(@RequestParam String appId) throws Exception {
+		return appValidateService.getNewAppValidateByAppId(appId).getDescribeText();
 	}
 
 	// 添加并保存
@@ -141,7 +157,8 @@ public class AppInfoController {
 			request.setAttribute("message", "上传失败，上传大小不得超过 500KB");
 			result = false;
 		} else {
-			String path = request.getSession().getServletContext().getRealPath(File.separator + "statics/uploadfiles");
+//			String path = request.getSession().getServletContext().getRealPath(File.separator + "statics/uploadfiles");
+			String path = Constants.UPLOAD_PATH;
 			String fileName = System.currentTimeMillis() + RandomUtils.nextInt(1000000) + "_Personal.jpg";
 			File targetFile = new File(path, fileName);
 			if (!targetFile.exists()) {
@@ -207,8 +224,8 @@ public class AppInfoController {
 				request.setAttribute("message", "上传失败，上传大小不得超过 500KB");
 				result = false;
 			} else {
-				String path = request.getSession().getServletContext()
-						.getRealPath(File.separator + "statics/uploadfiles");
+//				String path = request.getSession().getServletContext().getRealPath(File.separator + "statics/uploadfiles");
+				String path = Constants.UPLOAD_PATH;
 				String fileName = System.currentTimeMillis() + RandomUtils.nextInt(1000000) + "_Personal.jpg";
 				File targetFile = new File(path, fileName);
 				if (targetFile.exists()) {
@@ -277,18 +294,18 @@ public class AppInfoController {
 		appInfoService.delById(id);
 		return "redirect:/dev/flatform/app/list";
 	}
-	
-	//上架
-	@RequestMapping(value="/us",method=RequestMethod.GET)
+
+	// 上架
+	@RequestMapping(value = "/us", method = RequestMethod.GET)
 	public String us(@RequestParam String id) throws Exception {
-		appInfoService.op(id,4);
+		appInfoService.op(id, 4);
 		return "redirect:/dev/flatform/app/list";
 	}
-	
-	//下架
-	@RequestMapping(value="/ls",method=RequestMethod.GET)
+
+	// 下架
+	@RequestMapping(value = "/ls", method = RequestMethod.GET)
 	public String ls(@RequestParam String id) throws Exception {
-		appInfoService.op(id,5);
+		appInfoService.op(id, 5);
 		return "redirect:/dev/flatform/app/list";
 	}
 }

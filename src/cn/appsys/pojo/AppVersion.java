@@ -1,6 +1,9 @@
 package cn.appsys.pojo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 
@@ -23,8 +26,16 @@ public class AppVersion {
 	private String apkFileName;
 
 	private String softwareName;
-	
+
 	private String publishStatusName;
+
+	public String formateDate(Date date) {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		if (date != null)
+			return df.format(date);
+		else
+			return "";
+	}
 
 	public String getSoftwareName() {
 		return softwareName;

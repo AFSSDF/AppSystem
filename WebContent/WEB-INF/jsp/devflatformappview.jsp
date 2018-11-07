@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html lang="en" class=" ">
+<html lang="zh" class=" ">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -82,14 +82,14 @@
 									enctype="multipart/form-data"
 									action="${pageContext.request.contextPath }/dev/flatform/app/modifysave"
 									method="post">
-									<input type="hidden" id="id" name="id" value="${appInfo.id}"
+									<input autocomplete="off" type="hidden" id="id" name="id" value="${appInfo.id}"
 										readonly="readonly">
 									<div class="form-group">
 										<label class="control-label col-md-3 col-sm-3 col-xs-12"
 											for="softwareName">软件名称 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="softwareName" name="softwareName"
+											<input autocomplete="off" type="text" id="softwareName" name="softwareName"
 												value="${appInfo.softwareName}" disabled="disabled"
 												class="form-control col-md-7 col-xs-12">
 										</div>
@@ -99,7 +99,7 @@
 											for="APKName">APK名称 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="APKName" name="APKName"
+											<input autocomplete="off" type="text" id="APKName" name="APKName"
 												value="${appInfo.APKName}" disabled="disabled"
 												class="form-control col-md-7 col-xs-12" readonly="readonly">
 										</div>
@@ -109,7 +109,7 @@
 											for="supportROM">支持ROM <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="supportROM" name="supportROM"
+											<input autocomplete="off" type="text" id="supportROM" name="supportROM"
 												value="${appInfo.supportROM}" disabled="disabled"
 												class="form-control col-md-7 col-xs-12">
 										</div>
@@ -119,7 +119,7 @@
 											for="interfaceLanguage">界面语言 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="interfaceLanguage"
+											<input autocomplete="off" type="text" id="interfaceLanguage"
 												name="interfaceLanguage" disabled="disabled"
 												value="${appInfo.interfaceLanguage}"
 												class="form-control col-md-7 col-xs-12">
@@ -130,7 +130,7 @@
 											for="softwareSize">软件大小 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="softwareSize" name="softwareSize"
+											<input autocomplete="off" type="text" id="softwareSize" name="softwareSize"
 												value="${appInfo.softwareSize}" disabled="disabled"
 												class="form-control col-md-7 col-xs-12">
 										</div>
@@ -140,7 +140,7 @@
 											for="downloads">下载次数 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="downloads" name="downloads"
+											<input autocomplete="off" type="text" id="downloads" name="downloads"
 												disabled="disabled" value="${appInfo.downloads}"
 												class="form-control col-md-7 col-xs-12">
 										</div>
@@ -151,7 +151,7 @@
 										</label>
 
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" name="flatformName" id="flatformName"
+											<input autocomplete="off" type="text" name="flatformName" id="flatformName"
 												value="${appInfo.flatformName}" disabled="disabled"
 												class="form-control col-md-7 col-xs-12">
 										</div>
@@ -161,7 +161,7 @@
 											for="categoryLevel1">所属分类 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="categoryName" name="categoryName"
+											<input autocomplete="off" type="text" id="categoryName" name="categoryName"
 												value="${appInfo.categoryName1}-->${appInfo.categoryName2}-->${appInfo.categoryName3}"
 												disabled="disabled" class="form-control col-md-7 col-xs-12">
 										</div>
@@ -172,7 +172,7 @@
 											for="status">APK状态 <span class="required">*</span>
 										</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<input type="text" id="statusName" name="statusName"
+											<input autocomplete="off" type="text" id="statusName" name="statusName"
 												value="${appInfo.statusName}" disabled="disabled"
 												class="form-control col-md-7 col-xs-12">
 										</div>
@@ -234,7 +234,7 @@
 													<td>${appVersion.publishStatusName}</td>
 													<td><a
 														href="${pageContext.request.contextPath}${appVersion.downloadLink}">${appVersion.apkFileName}</a></td>
-													<td>${appVersion.modifyDate}</td>
+													<td>${appVersion.formateDate(appVersion.modifyDate)}</td>
 												</tr>
 											</c:forEach>
 										</tbody>

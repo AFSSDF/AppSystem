@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<html lang="en">
+<html lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -41,11 +41,11 @@
 					<form action="${pageContext.request.contextPath }/backend/loginflatform.html" method="post">
 						<h1>后台管理系统</h1>
 						<div>
-							<input type="text" class="form-control"  name="backendName" placeholder="请输入用户名"
+							<input autocomplete="off" type="text" class="form-control"  name="backendName" placeholder="请输入用户名"
 								required="">
 						</div>
 						<div>
-							<input type="password" class="form-control" name="backendPassword" placeholder="请输入密码"
+							<input autocomplete="off" type="password" class="form-control" name="backendPassword" placeholder="请输入密码"
 								required="">
 						</div>
 						<div id="message">${message}</div>
